@@ -1,0 +1,11 @@
+{
+    "name": "SeniorCorezoid",
+    "version": "1.0",
+    "description": "APi Belavia",
+    "main": "./BelaviaTest.wsdl",
+    "jsnext:main": "./BelaviaTest.wsdl",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SergeyPC/SeniorCorezoid.git"
+    }
+}
