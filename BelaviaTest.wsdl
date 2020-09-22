@@ -143,4 +143,4 @@
 <soap12:address location="http://api-tt.belavia.by/TimeTable/Service.asmx"/>
 </wsdl:port>
 </wsdl:service>
-</wsdl:definitions>
+</wsdl:definitions>;
