@@ -1,4 +1,5 @@
-<wsdl:definitions targetNamespace="http://webservices.belavia.by/">
+function WSDLreturn(){
+  return <wsdl:definitions targetNamespace="http://webservices.belavia.by/">
 <wsdl:documentation><img src="webservice.jpg" /></wsdl:documentation>
 <wsdl:types>
 <s:schema elementFormDefault="qualified" targetNamespace="http://webservices.belavia.by/">
@@ -147,4 +148,5 @@
 <soap12:address location="http://api-tt.belavia.by/TimeTable/Service.asmx"/>
 </wsdl:port>
 </wsdl:service>
-</wsdl:definitions>
+</wsdl:definitions>;
+}
