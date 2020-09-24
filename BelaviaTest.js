@@ -1,3 +1,2 @@
-;function masha(){
-  return "YesMyFriend";
-}
+"YesMyFriend"
+
