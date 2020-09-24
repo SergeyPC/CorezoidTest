@@ -1,1 +1,4 @@
-"http://webservices.belavia.by/"
+function masha(){
+  return "http://webservices.belavia.by/";
+}
+
