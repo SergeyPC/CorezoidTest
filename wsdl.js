@@ -1,11 +1,6 @@
-const BelaviaWSDL = 'GoodBoy';
 const http = require('http');
 
-module.exports.masha = function() {
-    return BelaviaWSDL;
-}
-
-module.exports.misha = function (httpUrl) {
+module.exports.BelaviaWSDL = function (httpUrl) {
     return new Promise(function(resolve, reject) {
         var req = http.get(httpUrl, function(res) {
             let body = '';
