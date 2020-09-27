@@ -1,4 +1,4 @@
-function wsdl(){
+;function wsdl(){
    return 'YesMyFriend';
 }
 
