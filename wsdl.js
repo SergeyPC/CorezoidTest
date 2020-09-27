@@ -5,13 +5,9 @@ module.exports.masha = function() {
     return BelaviaWSDL;
 }
 
-module.exports.misha = function () {
-    return getWsdlInner();
-}
-
-function getWsdlRequest() {
+module.exports.misha = function (httpUrl) {
     return new Promise(function(resolve, reject) {
-        var req = http.get('http://api-tt.belavia.by/TimeTable/Service.asmx?WSDL', function(res) {
+        var req = http.get(httpUrl, function(res) {
             let body = '';
             res.on('data', function(chunk) {
                 body += chunk;
@@ -25,12 +21,6 @@ function getWsdlRequest() {
         });
         req.end();
     });
-}
-
-async function getWsdlInner() {
-    let value = await getWsdlRequest();
-    console.log(value);
-    return value;
 }
 
 
