@@ -1,10 +1,5 @@
 const http = require('http');
 
-var expat = require('node-expat');
-var sanitizer = require('./sanitize.js')
-var joi = require('joi');
-var hoek = require('hoek');
-
 module.exports.BelaviaWSDL = function (httpUrl) {
     return new Promise(function(resolve, reject) {
         var req = http.get(httpUrl, function(res) {
