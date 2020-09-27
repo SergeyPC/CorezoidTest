@@ -57,6 +57,6 @@ module.exports.toJson = function (xml) {
   return obj;
 };
 
-module.exports.toXml = require('./json2xml');
+//module.exports.toXml = require('./json2xml');
 
 
