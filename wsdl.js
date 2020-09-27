@@ -1,4 +1,4 @@
-;function wsdl(){
-   return 'YesMyFriend';
+module.exports.wsdl = function() {
+    return "GoodBoy";
 }
 
