@@ -1,0 +1,4 @@
+function wsdl(){
+   reteurn "YesMyFriend";
+}
+
