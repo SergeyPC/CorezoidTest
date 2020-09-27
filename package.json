@@ -3,7 +3,6 @@
     "version": "1.0",
     "description": "APi Belavia",
     "main": "./BelaviaTest.js",
-    "jsnext:main": "./BelaviaTest.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/SergeyPC/SeniorCorezoid.git"
