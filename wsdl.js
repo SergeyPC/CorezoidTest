@@ -19,4 +19,7 @@ module.exports.BelaviaWSDL = function (httpUrl) {
 }
 
 
+module.exports.toJson = require('./xml2json');
+module.exports.toXml = require('./json2xml');
+
 
