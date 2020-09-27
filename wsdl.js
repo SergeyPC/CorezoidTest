@@ -1,4 +1,155 @@
+const BelaviaWSDL = <wsdl:definitions targetNamespace="http://webservices.belavia.by/">
+<wsdl:documentation><img src="webservice.jpg" /></wsdl:documentation>
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://webservices.belavia.by/">
+<s:element name="GetTimeTable">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="Airport" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:TimeTableType"/>
+<s:element minOccurs="1" maxOccurs="1" name="ViewDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:simpleType name="TimeTableType">
+<s:restriction base="s:string">
+<s:enumeration value="Arrival"/>
+<s:enumeration value="Departure"/>
+</s:restriction>
+</s:simpleType>
+<s:element name="GetTimeTableResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="GetTimeTableResult" type="tns:TimeTableResponce"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="TimeTableResponce">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="Flights" type="tns:ArrayOfFlight"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="ArrayOfFlight">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="Flight" nillable="true" type="tns:Flight"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="Flight">
+<s:attribute name="FlightNumber" type="s:string"/>
+<s:attribute name="Airport" type="s:string"/>
+<s:attribute name="ScheduleTime" type="s:dateTime" use="required"/>
+<s:attribute name="ExpectedTime" type="s:dateTime" use="required"/>
+<s:attribute name="ActualTime" type="s:dateTime" use="required"/>
+<s:attribute name="Status" type="s:string"/>
+<s:attribute name="Aircraft" type="s:string"/>
+</s:complexType>
+<s:element name="GetAirportsList">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetAirportsListResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="GetAirportsListResult" type="tns:AirportsResponse"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="AirportsResponse">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="Airport" type="tns:Airport"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="Airport">
+<s:attribute name="IATA" type="s:string"/>
+<s:attribute name="Name" type="s:string"/>
+</s:complexType>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="GetTimeTableSoapIn">
+<wsdl:part name="parameters" element="tns:GetTimeTable"/>
+</wsdl:message>
+<wsdl:message name="GetTimeTableSoapOut">
+<wsdl:part name="parameters" element="tns:GetTimeTableResponse"/>
+</wsdl:message>
+<wsdl:message name="GetAirportsListSoapIn">
+<wsdl:part name="parameters" element="tns:GetAirportsList"/>
+</wsdl:message>
+<wsdl:message name="GetAirportsListSoapOut">
+<wsdl:part name="parameters" element="tns:GetAirportsListResponse"/>
+</wsdl:message>
+<wsdl:portType name="OnlineTimeTableSoap">
+<wsdl:operation name="GetTimeTable">
+<wsdl:documentation>
+<h4>Возвращает список рейсов с информацией о прилёте / вылете и состоянии рейса.</h4>Входные параметры:<ul><li>Airport – IATA код аэропорта, взятый из списка доступных аэропортов</li><li>Type – тип расписания для вывода, может принимать значения Arrival –расписание вылетов из выбранного аэропорта, Departure - расписание прилётов в выбранный аэропорт.</li><li>ViewDate – дата в формате (YYYY-MM-DD), на которую будет сформировано расписание, может принимать значение +/- 2 дня от текущей даты.</li></ul><br />Возвращается список, состоящих из следующих полей:<ul><li>FlightNumber – номер рейса</li><li>Airport – IATA код аэропорта</li><li>ScheduleTime – запланированное локальное время вылета / прилёта рейса, в формате (YYYY-MM-DDThh:mm:ss)</li><li>ExpectedTime – предполагаемое локальное время вылета / прилёта рейса, в формате (YYYY-MM-DDThh:mm:ss)</li><li>ActualTime – фактическое локальное время вылета / прилёта рейса, в формате (YYYY-MM-DDThh:mm:ss)</li><li>Status – статус рейса, содержит следующие обозначения:<ul><li>Arrived - прибыл</li><li>Canceled - отменён</li><li>Delayed – задержан</li><li>Departure – вылетел</li><li>Scheduled – запланирован</li></ul></li><li>Aircraft – тип воздушного судна, на котором выполняется рейс</li></ul><br /><strong>Особенности: </strong>В списке рейсов атрибуты: ExpectedTime, ActualTime могут содержать значения времени и даты равной 0001-01-01T00:00:00. Что говорит о том, что время не уточнено.<br /><ul><li>ExpectedTime – будет принимать значения не равные 0001-01-01T00:00:00 только в том случае если рейс имеет статус: задержан, прибыл, вылетел, или отменён, а также если время запланированного рейса смещено со статусом запланирован.</li><li>ActualTime – будет принимать значения не равные 0001-01-01T00:00:00 только в том случае если статус рейса равен: прибыл (если тип расписание для вывода равен Arrival) или вылетел (если тип расписания для вывода равен Departure, и самолет еще не прибыл в конечную точку маршрута)</li></ul>
+</wsdl:documentation>
+<wsdl:input message="tns:GetTimeTableSoapIn"/>
+<wsdl:output message="tns:GetTimeTableSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="GetAirportsList">
+<wsdl:documentation>
+<h4>Возвращает список аэропортов, где есть информация о выполняемых рейсах.</h4>Входные параметры:<ul><li>Language - тоесть на, каком языке клиент хочет получить данные. На данный момент доступными являются параметры «EN», «RU». Регистр указываемых параметров не важен</li></ul><br />Возвращается список, состоящих из следующих полей:<ul><li>IATA - Код IATA, аэропорта</li><li>Name – Название, аэропорта на выбранном в запросе языке</li></ul><br /><strong>Особенности: </strong>Список аэропортов содержит необязательный атрибут Name, то есть если название аэропорта не уточнено системой, тогда данный параметр выводится, не будет.
+</wsdl:documentation>
+<wsdl:input message="tns:GetAirportsListSoapIn"/>
+<wsdl:output message="tns:GetAirportsListSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="OnlineTimeTableSoap" type="tns:OnlineTimeTableSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="GetTimeTable">
+<soap:operation soapAction="http://webservices.belavia.by/GetTimeTable" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GetAirportsList">
+<soap:operation soapAction="http://webservices.belavia.by/GetAirportsList" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="OnlineTimeTableSoap12" type="tns:OnlineTimeTableSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="GetTimeTable">
+<soap12:operation soapAction="http://webservices.belavia.by/GetTimeTable" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GetAirportsList">
+<soap12:operation soapAction="http://webservices.belavia.by/GetAirportsList" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="OnlineTimeTable">
+<wsdl:documentation><img src="webservice.jpg" /></wsdl:documentation>
+<wsdl:port name="OnlineTimeTableSoap" binding="tns:OnlineTimeTableSoap">
+<soap:address location="http://api-tt.belavia.by/TimeTable/Service.asmx"/>
+</wsdl:port>
+<wsdl:port name="OnlineTimeTableSoap12" binding="tns:OnlineTimeTableSoap12">
+<soap12:address location="http://api-tt.belavia.by/TimeTable/Service.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
+
 module.exports.masha = function() {
-    return "GoodBoy";
+    return BelaviaWSDL;
 }
 
