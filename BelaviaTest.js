@@ -1,3 +1,3 @@
-module.exports.function masha() {
+;function masha() {
    return "YesMyFriend";
 }
