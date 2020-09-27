@@ -1,4 +1,4 @@
 function wsdl(){
-   reteurn 'YesMyFriend';
+   return 'YesMyFriend';
 }
 
