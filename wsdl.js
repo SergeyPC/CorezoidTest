@@ -1,4 +1,4 @@
-module.exports.wsdl = function() {
+module.exports.masha = function() {
     return "GoodBoy";
 }
 
