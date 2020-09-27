@@ -6,5 +6,10 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/SergeyPC/SeniorCorezoid.git"
-    }
+    },
+  "dependencies": {
+    "hoek": "^4.2.1",
+    "joi": "^13.1.2",
+    "node-expat": "^2.3.18"
+  }
 }
