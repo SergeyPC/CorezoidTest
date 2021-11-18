@@ -1,10 +1,10 @@
 {
-    "name": "SeniorCorezoid",
+    "name": "CorezoidTest",
     "version": "1.0",
     "description": "APi Belavia",
     "main": "./wsdl.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/SergeyPC/SeniorCorezoid.git"
+        "url": "https://github.com/SergeyPC/CorezoidTest.git"
     }
 }
