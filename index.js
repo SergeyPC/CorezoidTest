@@ -1,4 +1,4 @@
 module.exports = (data) => {
-    
-    return data.newParam = "Y";
+    data.newParam = "Y";
+    return data;
 }
