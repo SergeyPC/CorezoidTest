@@ -5,7 +5,7 @@
     "main": "./index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/SergeyPC/CorezoidTest.git"
+        "url": "git@github.com:SergeyPC/CorezoidTest.git"
     }
 }
 
