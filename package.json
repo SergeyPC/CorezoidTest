@@ -2,7 +2,7 @@
     "name": "test-project",
     "version": "1.0.0",
     "description": "Test",
-    "main": "./index.js",
+    "main": "./usercode.js",
     "repository": {
         "type": "git",
         "url": "git@github.com:SergeyPC/CorezoidTest.git"
