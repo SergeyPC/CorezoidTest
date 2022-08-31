@@ -22,7 +22,7 @@ module.exports = (data) => {
         },
         ncco: [{
             "action": "talk",
-            "text": "Привет Сергей"
+            "text": "Hello"
         }]
     }, (error, response) => {
         if (error) data.error = error;
