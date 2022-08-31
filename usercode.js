@@ -25,8 +25,8 @@ module.exports = (data) => {
             "text": "Hello"
         }]
     }, (error, response) => {
-        if (error) data.error = error;
-        if (response) data.response = response;
+        data.error = error;
+        data.response = response;
     });
     return data;
 };
