@@ -11,7 +11,7 @@ const vonage = new Vonage({
 });
 
 module.exports = (data) => {
-    vonage.calls.create({
+    return vonage.calls.create({
         to: [{
             type: 'phone',
             number: "380935441781"
@@ -28,5 +28,5 @@ module.exports = (data) => {
         data.error = error;
         data.response = response;
     });
-    return data;
+   // return data;
 };
