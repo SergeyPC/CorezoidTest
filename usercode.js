@@ -6,7 +6,7 @@ const VONAGE_APPLICATION_PRIVATE_KEY_PATH = './private.key';
 const vonage = new Vonage({
       apiKey: VONAGE_API_KEY,
       apiSecret: VONAGE_API_SECRET,
-      applicationId: "0867d11e-b533-4d07-bcf2-682b734064b8",
+      applicationId: "0867d11e-b533-4d07-bcf2-682b734064b7",
       privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
 });
 
