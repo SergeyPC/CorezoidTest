@@ -1,7 +1,7 @@
 const Vonage = require('@vonage/server-sdk');
 const VONAGE_API_KEY = '89e001ee';
 const VONAGE_API_SECRET = '9jXvJWWHeqQkK2qd';
-const VONAGE_APPLICATION_PRIVATE_KEY_PATH = '/private.key';
+const VONAGE_APPLICATION_PRIVATE_KEY_PATH = '../private.key';
 
 module.exports = (data) => {
     
