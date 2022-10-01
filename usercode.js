@@ -37,23 +37,26 @@ module.exports = (data) => {
       ]
     }, (error, response) => {
       if (error) {
+        console.log(error);
         reject(error);
       }
       if (response) {
+        console.log(response);
         resolve(response);
       }
     })
   })
 
-  calls.then((resp) => {
+  return data.callAnswer = calls.then(resp => {
     vonage.calls.get(resp.uuid, (err, res) => {
       if (err) {
-        data.err = err;
+        console.log(err);
+        return err;
       }
       else {
-        data.res = res;
+        console.log(res);
+        return res;
       }
     })
   })
-  return data;
 }
