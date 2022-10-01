@@ -1,11 +1,22 @@
 {
-    "name": "test-project",
-    "version": "1.0.0",
-    "description": "Test",
-    "main": "./usercode.js",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:SergeyPC/CorezoidTest.git"
-    }
+  "name": "corezoidtest",
+  "version": "1.0.0",
+  "description": "IVR",
+  "main": "usercode.js",
+  "scripts": {
+    "start": "node usercode.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeyPC/CorezoidTest.git"
+  },
+  "author": "Filipp Serhii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeyPC/CorezoidTest/issues"
+  },
+  "homepage": "https://github.com/SergeyPC/CorezoidTest#readme",
+  "dependencies": {
+    "@vonage/server-sdk": "2.x.x"
+  }
 }
-

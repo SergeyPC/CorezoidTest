@@ -4,29 +4,54 @@ const VONAGE_API_SECRET = '9jXvJWWHeqQkK2qd';
 const VONAGE_APPLICATION_PRIVATE_KEY_PATH = './private.key';
 
 const vonage = new Vonage({
-      apiKey: VONAGE_API_KEY,
-      apiSecret: VONAGE_API_SECRET,
-      applicationId: "0867d11e-b533-4d07-bcf2-682b734064b7",
-      privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET,
+  applicationId: "29023722-635c-4541-8794-0e9140611b85",
+  privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
 });
 
-module.exports = (data) => {
-    data.result = vonage.calls.create({
-        to: [{
-            type: 'phone',
-            number: "380935441781"
-        }],
-        from: {
-            type: 'phone',
-            number: "380935441781"
-        },
-        ncco: [{
-            "action": "talk",
-            "text": "Hello"
-        }]
-    }, (error, response) => {
-      if (error) return error;
-      if (response) return response;
-    });
-    return data;
-};
+
+let calls = new Promise((resolve, reject) => {
+  vonage.calls.create({
+    to: [{
+      type: 'phone',
+      number: "380935441781"
+    }],
+    from: {
+      type: 'phone',
+      number: "380682886493"
+    },
+    ncco: [{
+      "action": "talk",
+      "text": "Do you confirm registration in the weather chat bot press 1 and lattice?"
+    },
+    {
+      action: 'input',
+      type: ['dtmf'],
+      eventUrl: ['https://www.corezoid.com/api/1/json/public/1126597/8abf74d6564ee21485b5d101a6354feca91c07a5'],
+      dtmf:{
+        'timeOut': '10',
+        'submitOnHash' : true
+      }
+    }
+    ]
+  }, (error, response) => {
+    if (error) {
+      console.error(error);
+      reject(error);
+    }
+    if (response) {
+      console.log(response);
+      resolve(response);
+    }
+  })
+})
+
+calls.then((resp) => {
+  vonage.calls.get(resp.uuid, (err, res) => {
+    if(err) { console.error(err); }
+    else {
+        console.log(res);
+    }
+  })
+})
