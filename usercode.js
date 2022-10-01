@@ -47,15 +47,17 @@ module.exports = (data) => {
     })
   })
 
-  return data.callAnswer = calls.then(resp => {
+  return calls.then(resp => {
     vonage.calls.get(resp.uuid, (err, res) => {
       if (err) {
         console.log(err);
-        return err;
+        data.callAnswer = err;
+        err(data);
       }
       else {
         console.log(res);
-        return res;
+        data.callAnswer = res;
+        res(data);
       }
     })
   })
