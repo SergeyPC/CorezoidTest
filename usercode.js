@@ -11,7 +11,7 @@ const vonage = new Vonage({
 });
 
 module.exports = (data) => {
-  let calls = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     vonage.calls.create({
       to: [{
         type: 'phone',
@@ -38,15 +38,17 @@ module.exports = (data) => {
     }, (error, response) => {
       if (error) {
         console.log(error);
-        reject(error);
+        data.callAnswer = error;
+        reject(data);
       }
       if (response) {
         console.log(response);
-        resolve(response);
+        data.callAnswer = response;
+        resolve(data);
       }
     })
   })
-
+/*
   return calls.then(resp => {
     return new Promise((resolve, reject) => {
       vonage.calls.get(resp.uuid, (err, res) => {
@@ -63,4 +65,5 @@ module.exports = (data) => {
       })
     })
   })
+  */
 }
