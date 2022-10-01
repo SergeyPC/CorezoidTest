@@ -48,17 +48,19 @@ module.exports = (data) => {
   })
 
   return calls.then(resp => {
-    vonage.calls.get(resp.uuid, (err, res) => {
-      if (err) {
-        console.log(err);
-        data.callAnswer = err;
-        err(data);
-      }
-      else {
-        console.log(res);
-        data.callAnswer = res;
-        res(data);
-      }
+    return new Promise((resolve, reject) => {
+      vonage.calls.get(resp.uuid, (err, res) => {
+        if (err) {
+          console.log(err);
+          data.callAnswer = err;
+          reject(data);
+        }
+        else {
+          console.log(res);
+          data.callAnswer = res;
+          resolve(data);
+        }
+      })
     })
   })
 }
