@@ -12,8 +12,8 @@ module.exports = (data) => {
     applicationId: "29023722-635c-4541-8794-0e9140611b85",
     privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
   });
-  
-  let calls = new Promise((resolve, reject) => {
+
+  let call = new Promise((resolve, reject) => {
     vonage.calls.create({
       to: [{
         type: 'phone',
@@ -53,7 +53,7 @@ module.exports = (data) => {
 
 
 
-  return calls.then((resp) => {
+  return call.then((resp) => {
     data.CallAnswer = resp;
     return data;
   });
