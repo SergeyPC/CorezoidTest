@@ -3,16 +3,15 @@ const VONAGE_API_KEY = '89e001ee';
 const VONAGE_API_SECRET = '9jXvJWWHeqQkK2qd';
 const VONAGE_APPLICATION_PRIVATE_KEY_PATH = './private.key';
 
+const vonage = new Vonage({
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET,
+  applicationId: "29023722-635c-4541-8794-0e9140611b85",
+  privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
+});
 
 
 module.exports = (data) => {
-  const vonage = new Vonage({
-    apiKey: VONAGE_API_KEY,
-    apiSecret: VONAGE_API_SECRET,
-    applicationId: "29023722-635c-4541-8794-0e9140611b85",
-    privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
-  });
-
   let call = new Promise((resolve, reject) => {
     vonage.calls.create({
       to: [{
@@ -51,21 +50,16 @@ module.exports = (data) => {
     })
   })
 
-
-
-  return call.then((resp) => {
-    data.CallAnswer = resp;
-    return data;
-  });
+  return call(data);
 }
   /*
 
 calls.then((resp) => {
 vonage.calls.get(resp.uuid, (err, res) => {
-  if (err) { console.error(err); }
-  else {
-    console.log(res);
-  }
+if (err) { console.error(err); }
+else {
+  console.log(res);
+}
 })
 })
 */
