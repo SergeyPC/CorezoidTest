@@ -6,7 +6,7 @@ const VONAGE_APPLICATION_PRIVATE_KEY_PATH = './private.key';
 
 
 module.exports = (data) => {
-  return new Promise((resolve, reject) => {
+  let calls = new Promise((resolve, reject) => {
     const vonage = new Vonage({
       apiKey: VONAGE_API_KEY,
       apiSecret: VONAGE_API_SECRET,
@@ -50,18 +50,22 @@ module.exports = (data) => {
       }
     })
   })
+
+
+
+  return calls.then((resp) => {
+    data.CallAnswer = resp;
+    return data;
+  });
 }
-
-/*
-calls.then((resp) => {
-
+  /*
 
 calls.then((resp) => {
-  vonage.calls.get(resp.uuid, (err, res) => {
-    if (err) { console.error(err); }
-    else {
-      console.log(res);
-    }
-  })
+vonage.calls.get(resp.uuid, (err, res) => {
+  if (err) { console.error(err); }
+  else {
+    console.log(res);
+  }
+})
 })
 */
