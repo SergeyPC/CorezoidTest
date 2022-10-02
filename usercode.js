@@ -50,7 +50,7 @@ module.exports = (data) => {
     })
   })
 
-  return call(data);
+  return call(data).then(resp => data);
 }
   /*
 
