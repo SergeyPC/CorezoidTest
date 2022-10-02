@@ -1,3 +1,4 @@
+/*
 const Vonage = require('@vonage/server-sdk');
 const VONAGE_API_KEY = '89e001ee';
 const VONAGE_API_SECRET = '9jXvJWWHeqQkK2qd';
@@ -49,7 +50,7 @@ module.exports = (data) => {
     })
   })
 }
-
+*/
 
 /*
 calls.then((resp) => {
@@ -61,3 +62,25 @@ calls.then((resp) => {
   })
 })
 */
+
+const https = require('https');
+
+module.exports = (data) => {
+  return new Promise((resolve) => {
+    https
+      .get('https://reqres.in/api/users?page=1', (resp) => {
+        let body = '';
+        resp.on('data', (chunk) => {
+          body += chunk;
+        });
+        resp.on('end', () => {
+          data.res = JSON.parse(body);
+          resolve(data);
+        });
+      })
+      .on('error', (err) => {
+        data.err = err;
+        resolve(data);
+      });
+  });
+};
