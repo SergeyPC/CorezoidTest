@@ -10,7 +10,7 @@ const vonage = new Vonage({
   privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH
 });
 
-
+module.exports = (data) => {
 let calls = new Promise((resolve, reject) => {
   vonage.calls.create({
     to: [{
@@ -57,3 +57,4 @@ return calls.then((resp) => {
     }
   })
 })
+}
