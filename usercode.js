@@ -15,7 +15,7 @@ module.exports = (data) => {
     vonage.calls.create({
       to: [{
         type: 'phone',
-        number: "380935441781"
+        number: data.phone
       }],
       from: {
         type: 'phone',
@@ -28,7 +28,7 @@ module.exports = (data) => {
       {
         action: 'input',
         type: ['dtmf'],
-        eventUrl: ['https://www.corezoid.com/api/1/json/public/1126597/8abf74d6564ee21485b5d101a6354feca91c07a5'],
+        eventUrl: ['https://www.corezoid.com/api/1/json/public/1128532/5269137d6678acf35749a729b65506c0f21cca4e'],
         dtmf: {
           'timeOut': '10',
           'submitOnHash': true
