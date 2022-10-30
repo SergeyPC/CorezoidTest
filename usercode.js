@@ -28,7 +28,7 @@ module.exports = (data) => {
       {
         action: 'input',
         type: ['dtmf'],
-        eventUrl: ['https://www.corezoid.com/api/2/json/public/1138328/4f24175577e9b832d146b137d2c482400489a84f'],
+        eventUrl: ['https://www.corezoid.com/api/2/json/public/1138421/23c2d42f0e7861f4ccfe9f3564faf40ae7bf8021'],
         dtmf: {
           'timeOut': '10',
           'submitOnHash': true
